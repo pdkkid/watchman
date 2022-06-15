@@ -47,6 +47,7 @@ type searcher struct {
 	BISEntities      []*Result[csl.EL]
 	MilitaryEndUsers []*Result[csl.MEU]
 	SSIs             []*Result[csl.SSI]
+	UVLs             []*Result[csl.UVL]
 
 	// metadata
 	lastRefreshedAt time.Time
