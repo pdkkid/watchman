@@ -9,8 +9,8 @@ type CSL struct {
 	ELs  []*EL  // Entity List – Bureau of Industry and Security
 	MEUs []*MEU // Military End User List
 	SSIs []*SSI // Sectoral Sanctions Identifications List (SSI) - Treasury Department
+	UVLs []*UVL // Unverified List – Bureau of Industry and Security
 
-	// []*UL (Unverified List – Bureau of Industry and Security)
 	// []*PSE (Foreign Sanctions Evaders (FSE) - Treasury Department)
 	// []*ISN (Nonproliferation Sanctions (ISN) - State Department)
 	// []*PLC (Palestinian Legislative Council List (PLC) - Treasury Department)
@@ -102,6 +102,20 @@ type SSI struct {
 	AlternateNames []string `json:"alternateNames"`
 	// IDsOnRecord is a list of the forms of identification on file for the entity
 	IDsOnRecord []string `json:"ids"`
+	// SourceListURL is a link to the official SSI list
+	SourceListURL string `json:"sourceListURL"`
+	// SourceInfoURL is a link to information about the list
+	SourceInfoURL string `json:"sourceInfoURL"`
+}
+
+// UVL is the Unverified List – Bureau of Industry and Security
+type UVL struct {
+	// ID is the unique identifier for the entity
+	ID string `json:"id"`
+	// Name is the primary name of the entity
+	Name string `json:"name"`
+	// Addresses is a list of known addresses associated with the entity
+	Addresses []string `json:"addresses"`
 	// SourceListURL is a link to the official SSI list
 	SourceListURL string `json:"sourceListURL"`
 	// SourceInfoURL is a link to information about the list

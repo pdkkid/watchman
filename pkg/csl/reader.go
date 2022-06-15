@@ -56,7 +56,7 @@ func Parse(r io.Reader) (*CSL, error) {
 				report.SSIs = append(report.SSIs, unmarshalSSI(record, i))
 
 			case "Unverified List (UVL) - Bureau of Industry and Security":
-				// TODO(adam): https://github.com/moov-io/watchman/issues/403
+				report.UVLs = append(report.UVLs, unmarshalUVL(record, i))
 
 			case "Nonproliferation Sanctions (ISN) - State Department":
 				// TODO(adam): https://github.com/moov-io/watchman/issues/413
@@ -108,6 +108,20 @@ func unmarshalEL(row []string, offset int) *EL {
 		FRNotice:           row[FRNoticeIdx+offset],
 		SourceListURL:      row[SourceListURLIdx+offset],
 		SourceInfoURL:      row[SourceInformationURLIdx+offset],
+	}
+}
+
+func unmarshalUVL(row []string, offset int) *UVL {
+	id := ""
+	if offset == 1 {
+		id = row[0] // set the ID from the newer CSV format
+	}
+	return &UVL{
+		ID:            id,
+		Name:          row[NameIdx+offset],
+		Addresses:     expandField(row[AddressesIdx+offset]),
+		SourceListURL: row[SourceListURLIdx+offset],
+		SourceInfoURL: row[SourceInformationURLIdx+offset],
 	}
 }
 
